@@ -1,6 +1,10 @@
+import sys
+import os
+sys.path.append(os.path.dirname(__file__))
+
 from pymongo import MongoClient
-from db import Database
-from config import get_config
+from .db import Database
+from .config import get_config
 
 class MongoDatabase(Database):
   def __init__(self):
