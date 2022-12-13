@@ -44,15 +44,15 @@ def find_matches(samples, Fs=fingerprint.DEFAULT_FS):
 def return_matches(hashes):
     mapper = {}
     for hash, offset in hashes:
-        mapper[hash.upper()] = offset
+        mapper[hash] = offset
     values = list(mapper.keys())
 
     for split_values in grouper(values, 1000):
         # @todo move to db related files
         query = """
-            SELECT upper(hash), song_fk, offset
+            SELECT hash, song_fk, offset
             FROM fingerprints
-            WHERE upper(hash) IN (%s)
+            WHERE hash IN (%s)
         """
         query = query % ', '.join('?' * len(split_values))
 
